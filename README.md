@@ -21,6 +21,8 @@ uv run ruff check .
 
 The demo uses generated toy data only. Replace it with data you are allowed to use, record its source and license, and keep private or raw data out of Git.
 
+The optional publish helper is deliberately manual and guarded: it checks for a clean worktree and requires `--confirm`. It never commits files or pushes as part of CI.
+
 ## Data and evaluation
 
 - Expected input: Versioned, authorized sample data.
@@ -41,6 +43,8 @@ tests/      small deterministic unit tests
 ## Responsible use
 
 Baseline experiment and evaluation report
+
+The publish helper refuses dirty working trees and requires the explicit `--confirm` flag. After configuring an authenticated remote, review the branch list and run `uv run python scripts/publish.py PATH_TO_REPO --remote origin --confirm` manually. CI never pushes automatically.
 
 ## Roadmap
 
