@@ -16,3 +16,8 @@ jobs:
       - run: uv sync --all-groups
       - run: uv run pytest
       - run: uv run ruff check .
+      - run: uv run python scripts/train.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-training-metrics
+          path: reports/metrics.json

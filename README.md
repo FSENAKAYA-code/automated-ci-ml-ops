@@ -30,6 +30,12 @@ The optional publish helper is deliberately manual and guarded: it checks for a 
 - Fit preprocessing steps on training data only. Use validation results for model selection; report the test result once for the chosen configuration.
 - Check the project's `src/mlops/` code and tests before adapting it to real data.
 
+## Domain workflow
+
+- CI runs tests, lint, a synthetic train/validation/test demo, and uploads only the generated `reports/metrics.json` artifact. Docker builds the same local demo.
+- `src/mlops/artifacts.py` writes local JSON metrics and can optionally log to a local MLflow store. It does not require external credentials.
+- `scripts/publish.py` refuses dirty worktrees and requires `--confirm`; it pushes branches only when manually invoked against a configured authenticated remote. CI never pushes automatically.
+
 ## Repository layout
 
 ```text
